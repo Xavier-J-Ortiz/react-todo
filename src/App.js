@@ -11,14 +11,23 @@ class App extends Component {
         {description: 'Find a Github project', isCompleted: false},
         {description: 'Go to a Meetup', isCompleted: true}
       ]
-    }
+    };
   }
+
+  toggleComplete(index) {
+    const todos = this.state.todos.slice();
+    const todo = todos[index];
+    todo.isCompleted = todo.isCompleted ? false : true;
+    this.setState({ todos: todos });
+
+  }
+
   render() {
     return (
       <div className="App">
         <ul>
           { this.state.todos.map( (todo, index) => 
-            <ToDo key={index} description={todo.description} isCompleted={todo.isCompleted} /> 
+            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) }/> 
           ) }
         </ul>
       </div>
